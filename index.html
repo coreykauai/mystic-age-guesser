@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mystic Age Guesser</title>
+  </head>
+  <body>
+    <script>
+      const WELCOME_MESSAGE =
+        "Welcome to the Mystic Age Guesser! Please enter your name to begin.";
+      let userName = prompt(WELCOME_MESSAGE);
+
+      while (!userName) {
+        userName = prompt(WELCOME_MESSAGE);
+      }
+
+      alert(
+        `Hey ${userName}! Let's play a game. I got powers to guess your age in under 7 tries`
+      );
+
+      let lowerAgeBondary = 1;
+      let upperAgeBondary = 122;
+      let didGuessCorrectly = false;
+
+      while (didGuessCorrectly === false) {
+        if (lowerAgeBondary > upperAgeBondary) {
+          alert(
+            `Hey ${userName}, it seems like there's a disturbance in the force. Refresh the page to play again.`
+          );
+        }
+        let guess = Math.floor((lowerAgeBondary + upperAgeBondary) / 2);
+
+        let userResponseToGuess = null;
+
+        while (userResponseToGuess !== "y" && userResponseToGuess !== "n") {
+          userResponseToGuess = prompt(
+            `Is your age ${guess}? Please enter y for yes or n for no`
+          );
+        }
+
+        didGuessCorrectly = userResponseToGuess === "y";
+
+        if (didGuessCorrectly === false) {
+          let userResponseToOlderYounger = null;
+
+          // 1: older, 2:younger
+          while (
+            userResponseToOlderYounger !== "1" &&
+            userResponseToOlderYounger !== "2"
+          ) {
+            userResponseToOlderYounger = prompt(
+              `Are you older or younger than ${guess}? Enter 1 for older or 2 for younger.`
+            );
+          }
+          //older
+          if (userResponseToOlderYounger === "1") {
+            lowerAgeBondary = guess + 1;
+          } else {
+            upperAgeBondary = guess - 1;
+          }
+        }
+      }
+
+      alert("please refresh page to play again!");
+    </script>
+  </body>
+</html>
